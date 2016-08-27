@@ -24,7 +24,7 @@ namespace PatientManagement
 
             string msg = "";
 
-            if(txtName.Text == "")
+            if (txtName.Text == "")
             {
                 er++;
                 msg += "Name required\n";
@@ -69,7 +69,7 @@ namespace PatientManagement
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "insert into patient(name,contact,email,address,occupation,history) values('" + txtName.Text + "','"+txtContact.Text+"','"+txtEmail.Text+"','"+txtAddress.Text+"','"+txtOccupation.Text+"','"+txtHistory.Text+"','"+txtComboBox.Text+"')";
+                cmd.CommandText = "insert into patient(name,contact,email,address,occupation,history,doctorName) values('" + txtName.Text + "','" + txtContact.Text + "','" + txtEmail.Text + "','" + txtAddress.Text + "','" + txtOccupation.Text + "','" + txtHistory.Text + "','" + txtComboBox.Text + "')";
 
                 try
                 {
@@ -117,42 +117,29 @@ namespace PatientManagement
 
         }
 
-        private void txtComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void frmNewPatient_Load(object sender, EventArgs e)
         {
-            int er = 0;
-            string msg = "Doctor needed";
+            
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = PatientManagement.Properties.Settings.Default.MyCon;
+            cn.Open();
 
-            if (txtComboBox.Text == "")
-            {
-                er++;
-                MessageBox.Show(msg);
-            }
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cmd.CommandText = "select name from doctor";
 
-            if (er == 0)
-            {
-                SqlConnection cn = new SqlConnection();
-                cn.ConnectionString = PatientManagement.Properties.Settings.Default.MyCon;
-                cn.Open();
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
 
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandText = "select * from doctor(name)";
+            foreach (DataRow dr in dt.Rows)
+	        {
+                txtComboBox.Items.Add(dr["name"].ToString());
+	        }
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                
-                try
-                {
-                    dr.Read();
-                    
-                    txtComboBox.Items.Add(dr.GetString(1));
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show(ex.Message);
-                }
-                cn.Close();
-            }
+            cn.Close();
+       
         }
     }
 }

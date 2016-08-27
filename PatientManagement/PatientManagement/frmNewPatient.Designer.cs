@@ -42,8 +42,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtName
@@ -155,16 +155,6 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "&History";
             // 
-            // txtComboBox
-            // 
-            this.txtComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.txtComboBox.FormattingEnabled = true;
-            this.txtComboBox.Location = new System.Drawing.Point(291, 27);
-            this.txtComboBox.Name = "txtComboBox";
-            this.txtComboBox.Size = new System.Drawing.Size(167, 21);
-            this.txtComboBox.TabIndex = 13;
-            this.txtComboBox.SelectedIndexChanged += new System.EventHandler(this.txtComboBox_SelectedIndexChanged);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -174,13 +164,21 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Doctors List";
             // 
+            // txtComboBox
+            // 
+            this.txtComboBox.FormattingEnabled = true;
+            this.txtComboBox.Location = new System.Drawing.Point(295, 40);
+            this.txtComboBox.Name = "txtComboBox";
+            this.txtComboBox.Size = new System.Drawing.Size(121, 21);
+            this.txtComboBox.TabIndex = 15;
+            // 
             // frmNewPatient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 376);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtComboBox);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -196,6 +194,7 @@
             this.Controls.Add(this.txtName);
             this.Name = "frmNewPatient";
             this.Text = "frmNewPatient";
+            this.Load += new System.EventHandler(this.frmNewPatient_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,7 +215,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox txtComboBox;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox txtComboBox;
     }
 }

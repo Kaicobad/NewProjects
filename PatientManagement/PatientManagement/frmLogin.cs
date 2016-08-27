@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PatientManagement
 {
@@ -19,9 +20,42 @@ namespace PatientManagement
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            frmMain fm = new frmMain();
-            fm.Show();
-            
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = PatientManagement.Properties.Settings.Default.MyCon;
+            cn.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cmd.CommandText = "select * from login where name = '" + txtName.Text + "', and password = '" + txtPass.Text + "'";
+
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+
+            int er = 0;
+            while (dr.Read())
+            {
+                er += 1;
+            }
+            if (er==1)
+            {
+                MessageBox.Show("LogedIn");
+                frmMain fm = new frmMain();
+                fm.Show();
+            }
+            else if (er==0)
+            {
+                MessageBox.Show("overitted");
+            }
+            else
+	        {
+                MessageBox.Show("incorrect");
+	        }
+
+            cn.Close();
+
+            txtName.Clear();
+            txtPass.Clear();
+             
         }
     }
 }
