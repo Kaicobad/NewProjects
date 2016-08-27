@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PatientManagement
+{
+
+    public partial class frmMain : Form
+    {
+        frmPatient paitent = new frmPatient();
+
+        public frmMain()
+        {
+            InitializeComponent();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblWatch.Text = "Date And Time :" + DateTime.Now.ToString();
+        }
+
+
+        private void patientEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (paitent.IsDisposed)
+                paitent = new frmPatient();
+
+            paitent.Show();
+            paitent.MdiParent = this;
+            paitent.BringToFront();
+
+            
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewPatient newpaitent = new frmNewPatient();
+
+            if (newpaitent.IsDisposed)
+                newpaitent = new frmNewPatient();
+
+            newpaitent.Show();
+            newpaitent.BringToFront();
+            newpaitent.MdiParent = this;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void doctorEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDoctor newdoctor = new frmDoctor();
+
+            if (newdoctor.IsDisposed)
+                newdoctor = new frmDoctor();
+
+            newdoctor.Show();
+            newdoctor.BringToFront();
+            newdoctor.MdiParent = this;
+        }
+
+    }
+}
