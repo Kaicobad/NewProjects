@@ -67,5 +67,61 @@ namespace PatientManagement
             newdoctor.MdiParent = this;
         }
 
+        private void patientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPatientHistory ph = new frmPatientHistory();
+
+            if (ph.IsDisposed)
+                ph = new frmPatientHistory();
+
+            ph.Show();
+            ph.BringToFront();
+            ph.MdiParent = this;
+
+        }
+
+        private void doctorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmDoctorHistory dh = new frmDoctorHistory();
+            dh.Show();
+            dh.MdiParent = this;
+            dh.BringToFront();
+
+            if (dh.IsDisposed)
+            {
+                dh = new frmDoctorHistory();
+            }
+
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            this.MinimumSize = this.Size;
+        }
+
+        private void searchMedicineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMedicine fmd = new frmMedicine();
+            fmd.BringToFront();
+            fmd.MdiParent = this;
+            fmd.Show();
+
+            if (fmd.IsDisposed)
+
+                fmd = new frmMedicine();
+        }
+
+        private void addMedicineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddMedicine fmda = new frmAddMedicine();
+            fmda.Show();
+            fmda.BringToFront();
+            fmda.MdiParent = this;
+
+            if (fmda.IsDisposed)
+
+                fmda = new frmAddMedicine();
+        }
+
     }
 }

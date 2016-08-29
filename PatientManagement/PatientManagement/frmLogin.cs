@@ -26,7 +26,7 @@ namespace PatientManagement
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
-            cmd.CommandText = "select * from login where name = '" + txtName.Text + "', and password = '" + txtPass.Text + "'";
+            cmd.CommandText = "select * from login where name = '" + txtName.Text + "' and password = '" + txtPass.Text + "'";
 
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
@@ -34,7 +34,7 @@ namespace PatientManagement
             int er = 0;
             while (dr.Read())
             {
-                er += 1;
+                er ++;
             }
             if (er==1)
             {
@@ -42,20 +42,27 @@ namespace PatientManagement
                 frmMain fm = new frmMain();
                 fm.Show();
             }
-            else if (er==0)
+            else if (er == 0)
             {
                 MessageBox.Show("overitted");
             }
             else
-	        {
+            {
                 MessageBox.Show("incorrect");
-	        }
-
-            cn.Close();
+            }
 
             txtName.Clear();
             txtPass.Clear();
+
+            cn.Close();
              
         }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            this.MinimumSize = this.Size;
+
+        }
+        
     }
 }

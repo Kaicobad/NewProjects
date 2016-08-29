@@ -8,45 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+
 namespace PatientManagement
 {
-    public partial class frmDoctor : Form
+    public partial class frmAddMedicine : Form
     {
-        public frmDoctor()
+        public frmAddMedicine()
         {
             InitializeComponent();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int er = 0;
+            int er=0;
 
             string msg = "";
 
             if (txtName.Text == "")
             {
                 er++;
-                msg += "Name is Required\n"; 
-            }
-            if (txtContact.Text == "")
-            {
-                er++;
-                msg += "Cantact Required\n";
-            }
-            if (txtAddress.Text == "")
-            {
-                er++;
-                msg += "Address Required\n";
-            }
-            if (txtEmail.Text == "")
-            {
-                er++;
-                msg += "Email is required";
+                msg += "Medicine Name Required";
             }
             if (txtType.Text == "")
             {
                 er++;
-                msg += "Please insert the type";
+                msg += "EnterType\n";
+            }
+            if(txtSubgroup.Text=="")
+            {
+                er++;
+                msg += "Enter Group";
+            }
+            if (txtPrice.Text == "")
+            {
+                er++;
+                msg += "enter Price";
             }
 
             if (er == 0)
@@ -57,30 +53,31 @@ namespace PatientManagement
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "insert into doctor(name,contact,address,email,type) values('"+txtName.Text+"','"+txtContact.Text+"','"+txtAddress.Text+"','"+txtEmail.Text+"','"+txtType.Text+"')";
+                cmd.CommandText = "insert into medicine(name,type,subgroup,medication,price) values ('" + txtName.Text + "','" + txtType.Text + "','" + txtSubgroup.Text + "','" + txtMedication.Text + "','" + txtPrice.Text + "')";
 
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("New Doctor Added!!");
+                    MessageBox.Show("Medicine is been Registered!!");
 
                     txtName.Text = "";
                     txtName.Focus();
 
-                    txtContact.Text = "";
-                    txtContact.Focus();
-
-                    txtAddress.Text = "";
-                    txtAddress.Focus();
-
-                    txtEmail.Text = "";
-                    txtEmail.Focus();
-
                     txtType.Text = "";
                     txtType.Focus();
+
+                    txtSubgroup.Text = "";
+                    txtSubgroup.Focus();
+
+                    txtMedication.Text = "";
+                    txtMedication.Focus();
+
+                    txtPrice.Text = "";
+                    txtPrice.Focus();
                 }
                 catch (Exception ex)
                 {
+
                     MessageBox.Show(ex.Message);
                 }
                 finally
@@ -92,11 +89,7 @@ namespace PatientManagement
             {
                 MessageBox.Show(msg);
             }
-        }
-
-        private void frmDoctor_Load(object sender, EventArgs e)
-        {
-            this.MinimumSize = this.Size;
+            
         }
     }
 }
